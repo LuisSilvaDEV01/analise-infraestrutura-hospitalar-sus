@@ -2,7 +2,7 @@
 
 **Análise de dados públicos de saúde, comparação temporal e otimização de consultas em MySQL.**
 
-> Status: Dados processados prontos + **scripts do experimento de indexação (A/B)** — falta rodar no MySQL e registrar os EXPLAIN
+> Status: Experimento SQL (A/B) + **notebooks de análise Lula × Bolsonaro** (Pandas) prontos
 
 ## Sobre o projeto
 
@@ -130,7 +130,23 @@ Guia completo (do zero ao que afirmar no relatório): [`docs/instrucoes_experime
 - [ ] Aplicar índices e registrar EXPLAIN do Cenário B
 - [ ] Escrever a discussão comparativa dos planos
 
-### 6. Interpretação dos resultados
+### 6. Análises avançadas (Python / Pandas) — “para além”
+
+Notebook: [`notebooks/01_lula_vs_bolsonaro_leitos.ipynb`](notebooks/01_lula_vs_bolsonaro_leitos.ipynb)
+
+1. Placar de variação de leitos (2019–2022 vs 2023–2025/2026)
+2. Concentração regional (centro econômico × Norte/Nordeste)
+3. Absoluto vs per capita (população IBGE)
+4. Leitos existentes vs leitos SUS (acesso real?)
+
+População auxiliar: `data/external/populacao_uf_ibge.csv`.
+
+```powershell
+pip install -r requirements.txt
+jupyter notebook notebooks/01_lula_vs_bolsonaro_leitos.ipynb
+```
+
+### 7. Interpretação dos resultados
 
 Os resultados serão organizados para responder às questões de pesquisa e apresentar as principais tendências observadas.
 
@@ -153,27 +169,20 @@ Análise de Dados - SUS/
 ├── README.md
 ├── .gitignore
 ├── scripts/
-│   ├── clean_leitos.py               # Limpeza raw → processed
-│   └── load_processed_to_mysql.py    # Carga no MySQL (Cenário A)
+│   ├── clean_leitos.py
+│   ├── load_processed_to_mysql.py
+│   └── _build_notebook_analises.py
+├── notebooks/
+│   └── 01_lula_vs_bolsonaro_leitos.ipynb
 ├── data/
 │   ├── raw/
-│   └── processed/
-├── sql/
-│   ├── 01_create_database.sql
-│   ├── 02_create_tables.sql          # sem índices
-│   ├── 03_load_data.sql
-│   ├── 03_import_validation.sql
-│   ├── 04_analysis_queries.sql       # Q1–Q8
-│   ├── 05_indexes.sql                # Cenário B
-│   └── 06_explain_queries.sql        # EXPLAIN das mesmas queries
+│   ├── processed/
+│   └── external/populacao_uf_ibge.csv
+├── sql/   # experimento A/B de índices
 ├── docs/
-│   ├── instrucoes_experimento_indices.md  # guia A/B + afirmações
-│   ├── mysql_indexing_experiment.md       # atalho
-│   ├── raw_data_inventory.md
-│   ├── data_cleaning.md
-│   ├── data_dictionary.md
-│   └── cleaning_report.json
-├── results/explain/scenario_a|b/     # salvar saídas do EXPLAIN
+├── results/
+│   ├── explain/scenario_a|b/
+│   └── figures/               # gráficos do notebook
 └── requirements.txt
 ```
 

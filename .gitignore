@@ -10,6 +10,12 @@ data/processed/*
 # Artefatos temporários de inspeção
 docs/_raw_analysis.json
 
+# Figuras geradas (opcional versionar; regeneráveis pelo notebook)
+# results/figures/*.png
+
+# Jupyter
+.ipynb_checkpoints/
+
 # Sistema / IDE
 .DS_Store
 Thumbs.db
