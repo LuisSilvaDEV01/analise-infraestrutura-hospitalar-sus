@@ -1,0 +1,18 @@
+# Dados brutos (volume ~2 GB — manter localmente, não versionar)
+data/raw/*.xml
+data/raw/*.csv
+
+# Dados processados (~415 MB — regeneráveis via scripts/clean_leitos.py)
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/README.md
+
+# Artefatos temporários de inspeção
+docs/_raw_analysis.json
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/
